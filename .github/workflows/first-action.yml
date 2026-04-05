@@ -1,17 +1,29 @@
-name: My First Action
+name: Run JMeter Test
 
 on: [push]
 
 jobs:
-  test:
+  jmeter-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say Hello
-        run: echo "Hello Surya! 🚀"
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Show files
-        run: ls -l
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Install JMeter
+        run: |
+          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.2.tgz
+          tar -xvzf apache-jmeter-5.6.2.tgz
+
+      - name: Run JMeter Test
+        run: |
+          ./apache-jmeter-5.6.2/bin/jmeter -n -t first.jmx -l result.jtl
 
 
 
