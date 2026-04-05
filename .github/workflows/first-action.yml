@@ -1,0 +1,17 @@
+name: My First Action
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say Hello
+        run: echo "Hello Surya! 🚀"
+
+      - name: Show files
+        run: ls -l
+
+
+
